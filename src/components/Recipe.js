@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 const RECIPES = {
@@ -20,10 +20,31 @@ const RECIPES = {
   }
 };
 
+const loadData = async (id) => {
+  const recipeData = await new Promise((resolve) => {
+    const recipe = RECIPES[id];
+    resolve(recipe);
+  })
+
+  return recipeData;
+}
+
 const Recipe = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [recipe, setRecipe] = useState({});
   const { rId } = useParams();
 
-  const recipe = RECIPES[rId];
+  useEffect(async () => {
+    const data = await loadData(rId);
+
+    setRecipe(data);
+  }, []);
+
+  useEffect(async () => {
+    const data = await loadData(rId);
+
+    setRecipe(data);
+  }, [rId]);
 
   if (!recipe) return (
     <div>Не найдено, перейти к <Link to='/'>списку рецептов</Link></div>
