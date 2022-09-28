@@ -33,10 +33,7 @@ const App = () => {
         <Route path='/recipe/new' element={<NewRecipe />} />
         <Route path='/recipe/:rId' element={<Recipe />} />
 
-
         <Route path='/' element={<Auth><List /></Auth>} />
-
-
 
         <Route path='*' element={<div>404</div>} />
 
